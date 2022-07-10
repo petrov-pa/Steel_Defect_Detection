@@ -3,10 +3,18 @@ import os
 import numpy as np
 
 
-def train_test_split():
+def train_val_split():
+    """ Разбивает выборку на обучающую и валидационную
+    Returns:
+        train_seg - Список с названиями файлов обучающей выборки модели сегментации (np.array)
+        test_seg - Список с названиями файлов валидационной выборки модели сегментации (np.array)
+        train_clf - Список с названиями файлов обучающей выборки модели классификации (np.array)
+        test_clf - Список с названиями файлов валидационной выборки модели классификации (np.array)
+        df - Таблица с информацией о разметке (DataFrame)
+
+     """
     train_data = './data/train/images/'
-    mask_data = './data/train/train.csv/'
-    df = pd.read_csv(mask_data + 'train.csv')
+    df = pd.read_csv('./data/train/train.csv')
     # В выборке есть много изображений, которые не содержат дефектов. Добавим их в нашу таблицу
     for name in os.listdir(train_data):
         if name not in df.ImageId.values:
