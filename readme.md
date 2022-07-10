@@ -19,6 +19,6 @@
 Val_loss: 0.0873  
 Val_dice_coef: 0.7322
 
-![загруженное (17)](https://user-images.githubusercontent.com/64748758/178143820-2ee0797e-1974-4ec8-b0db-dfd1bf9d91ad.png)
+![загруженное (2)](https://user-images.githubusercontent.com/64748758/178143833-d9483e9c-9ff0-423c-a207-7c10548a0cba.png)
 
 ![загруженное (1)](https://user-images.githubusercontent.com/64748758/145363234-6b5e05f9-b589-4367-ad80-31ae8bc5b8a5.png)
