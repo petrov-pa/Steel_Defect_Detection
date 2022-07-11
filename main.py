@@ -1,8 +1,9 @@
 import numpy as np
-from models import get_clf, get_linknet
+from models import FixedDropout
 import cv2
 import os
 from albumentations import Normalize
+from tensorflow.keras.models import load_model
 
 
 def run():
@@ -10,10 +11,12 @@ def run():
     if not list_img:
         return print('Нет файлов в папке')
     # загружаем обученную модель
-    clf = get_clf()
-    linknet = get_linknet()
-    clf.load_weights('./models/best_classifier.hdf5')
-    linknet.load_weights('./models/best_linknet.hdf5')
+    # clf = get_clf()
+    # linknet = get_linknet()
+    # clf.load_weights('./models/best_classifier.hdf5')
+    # linknet.load_weights('./models/best_linknet.hdf5')
+    clf = load_model('./models/clf.h5', custom_objects={'FixedDropout': FixedDropout}, compile=False)
+    linknet = load_model('./models/linknet.h5', custom_objects={'FixedDropout': FixedDropout}, compile=False)
     normalize = Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))
     for img in list_img:
         orig_img = cv2.imread('./inputs/' + img)

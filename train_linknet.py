@@ -3,7 +3,7 @@ from split_data import train_val_split
 from data_generator import DataGenerator
 from tensorflow.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
 from models import get_linknet
-from losses import dice_coef, bce_dice_loss
+from losses import dice_coef, bce_dice_loss, weighted_loss
 
 # Получаем данные для обучения
 train, test, _, _, df = train_val_split()
@@ -19,6 +19,9 @@ save_callback = ModelCheckpoint('./models/best_linknet_v1.hdf5', monitor='val_lo
 callbacks = [lr_callback, save_callback]
 
 linknet = get_linknet()
+class_weight = [1., 10., 0.05, 0.25]
 
-linknet.compile(optimizer=Adam(0.001), loss=bce_dice_loss, metrics=[dice_coef])
+linknet.compile(optimizer=Adam(0.001), loss=weighted_loss(bce_dice_loss, class_weight), metrics=[dice_coef])
 linknet.fit(train_gen_seg, validation_data=test_gen_seg, epochs=60, callbacks=callbacks)
+
+linknet.save('./models/linknet.h5')
