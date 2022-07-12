@@ -8,4 +8,5 @@ git+https://github.com/qubvel/segmentation_models
 keras-applications==1.0.8
 image-classifiers==1.0.0
 efficientnet==1.0.0
-
+flask
+flask_wtf
