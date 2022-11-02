@@ -1,11 +1,11 @@
 import numpy as np
-from models import FixedDropout
+from src.models import FixedDropout
 import cv2
 import os
 from tensorflow.keras.models import load_model
 
 
-def run():
+def main():
     list_img = os.listdir('./inputs')
     if not list_img:
         return print('Нет файлов в папке')
@@ -34,4 +34,5 @@ def run():
     return print('Сегментация закончена')
 
 
-run()
+if __name__ == '__main__':
+    main()
