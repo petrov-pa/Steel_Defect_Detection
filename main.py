@@ -10,8 +10,8 @@ def main():
     if not list_img:
         return print('Нет файлов в папке')
     # загружаем обученную модель
-    clf = load_model('./models/clf.h5', custom_objects={'FixedDropout': FixedDropout}, compile=False)
-    linknet = load_model('./models/linknet.h5', custom_objects={'FixedDropout': FixedDropout}, compile=False)
+    clf = load_model('weights/clf.h5', custom_objects={'FixedDropout': FixedDropout}, compile=False)
+    linknet = load_model('weights/linknet.h5', custom_objects={'FixedDropout': FixedDropout}, compile=False)
     for name in list_img:
         orig_img = cv2.imread('./inputs/' + name)
         if orig_img is None:

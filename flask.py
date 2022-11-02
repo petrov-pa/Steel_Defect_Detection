@@ -13,8 +13,8 @@ warnings.filterwarnings("ignore")
 
 def run(filename):
     # загружаем обученную модель
-    clf = load_model('./models/clf.h5', custom_objects={'FixedDropout': FixedDropout}, compile=False)
-    linknet = load_model('./models/linknet.h5', custom_objects={'FixedDropout': FixedDropout}, compile=False)
+    clf = load_model('weights/clf.h5', custom_objects={'FixedDropout': FixedDropout}, compile=False)
+    linknet = load_model('weights/linknet.h5', custom_objects={'FixedDropout': FixedDropout}, compile=False)
     orig_img = cv2.imread('./inputs/' + filename)
     norm_img = orig_img/255
     # предсказываем наличие дефекта
