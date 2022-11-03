@@ -110,5 +110,5 @@
 #### Запуск через flask 
 Запустить скрипт и выбрать файл из папки data/test
 
-    python3 flask.py 
+    python3 flask_run.py 
 
