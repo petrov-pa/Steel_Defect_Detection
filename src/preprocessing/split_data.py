@@ -14,7 +14,7 @@ def train_val_split():
 
      """
     train_data = './data/train/images/'
-    df = pd.read_csv('../../data/train/train.csv')
+    df = pd.read_csv('./data/train/train.csv')
     # В выборке есть много изображений, которые не содержат дефектов. Добавим их в нашу таблицу
     for name in os.listdir(train_data):
         if name not in df.ImageId.values:

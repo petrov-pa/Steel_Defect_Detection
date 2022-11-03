@@ -6,14 +6,14 @@ from tensorflow.keras.models import load_model
 
 
 def main():
-    list_img = os.listdir('./inputs')
+    list_img = os.listdir('./data/test')
     if not list_img:
         return print('Нет файлов в папке')
     # загружаем обученную модель
     clf = load_model('weights/clf.h5', custom_objects={'FixedDropout': FixedDropout}, compile=False)
     linknet = load_model('weights/linknet.h5', custom_objects={'FixedDropout': FixedDropout}, compile=False)
     for name in list_img:
-        orig_img = cv2.imread('./inputs/' + name)
+        orig_img = cv2.imread('./data/test/' + name)
         if orig_img is None:
             return print('Неверный формат файла: {}'.format(name))
         norm_img = orig_img/255

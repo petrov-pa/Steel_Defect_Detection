@@ -1,7 +1,6 @@
 from tensorflow.keras.layers import Dense, Dropout, BatchNormalization, GlobalAveragePooling2D, Activation
 from segmentation_models import Linknet
 from tensorflow.keras.models import Model
-# import keras.layers as layers
 from tensorflow.keras import backend as K
 
 

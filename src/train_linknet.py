@@ -24,4 +24,3 @@ class_weight = [1., 10., 0.05, 0.25]
 linknet.compile(optimizer=Adam(0.001), loss=weighted_loss(bce_dice_loss, class_weight), metrics=[dice_coef])
 linknet.fit(train_gen_seg, validation_data=test_gen_seg, epochs=60, callbacks=callbacks)
 
-# linknet.save('./weights/linknet.h5')
