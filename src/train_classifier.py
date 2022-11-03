@@ -20,4 +20,3 @@ callbacks = [lr_callback, save_callback]
 clf = get_clf()
 clf.compile(optimizer=Adam(0.001), loss='binary_crossentropy', metrics=['accuracy'])
 clf.fit(train_gen_clf, validation_data=test_gen_clf, epochs=80, callbacks=callbacks)
-
