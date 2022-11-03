@@ -97,9 +97,9 @@
 
 Подгрузить нужные файлы:
 
-    python3 scr.load_weights.py  # веса моделей
-    python3 scr.load_test.py     # данные для проверки работы модели
-    python3 scr.load_train.py    # данные для обучения моделей
+    python3 -m scr.load_weights.py  # веса моделей
+    python3 -m scr.load_test.py     # данные для проверки работы модели
+    python3 -m scr.load_train.py    # данные для обучения моделей
 
 #### Запуск из командной строки
 Проверить, что в папку data/test загрузились файлы и запустить скрипт
