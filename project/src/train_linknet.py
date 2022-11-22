@@ -1,9 +1,9 @@
 from tensorflow.keras.optimizers import Adam
-from src.preprocessing.split_data import train_val_split
-from src.preprocessing.preprocessing import DataGenerator
+from project.src.preprocessing.split_data import train_val_split
+from project.src.preprocessing.preprocessing import DataGenerator
 from tensorflow.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
-from src.models import get_linknet
-from src.metrics.losses import dice_coef, bce_dice_loss, weighted_loss
+from project.src.models import get_linknet
+from project.src.metrics.losses import dice_coef, bce_dice_loss, weighted_loss
 
 # Получаем данные для обучения
 train, test, _, _, df = train_val_split()

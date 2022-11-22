@@ -1,7 +1,7 @@
 from tensorflow.keras.optimizers import Adam
-from src.preprocessing.split_data import train_val_split
-from src.preprocessing.preprocessing import DataGenerator
-from src.models import get_clf
+from project.src.preprocessing.split_data import train_val_split
+from project.src.preprocessing.preprocessing import DataGenerator
+from project.src.models import get_clf
 from tensorflow.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
 
 # Получаем данные для обучения

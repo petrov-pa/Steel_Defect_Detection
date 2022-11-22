@@ -90,10 +90,25 @@
 ![img_6.png](img_6.png)
 
 # Инструкция установки и запуска
+Установка пакетного менеджера:
 
-Необходимо установить зависимости:
+    pip install poetry
 
-    pip install -r requirements.txt
+Развертывание окружения:
+
+    poetry init
+    poetry env use 3.9
+
+Сборка и загрузка пакета:
+
+    poetry build
+    poetry publish -r testpypi -u <username> -p <password>
+
+Ссылка на пакет: https://test.pypi.org/project/steel-defect-detection/
+
+Установка пакета из pypi-test:
+
+    poetry add https://test.pypi.org/simple/ steel-defect-detection
 
 Подгрузить нужные файлы:
 

@@ -58,7 +58,7 @@ def predict():
     if form.validate_on_submit():
         file = form.file.data
         filename = secure_filename(file.filename)
-        file.save(os.path.join('./data/test', filename))
+        file.save(os.path.join('data/test', filename))
         defect_image = run(filename)
         return render_template('submit.html', form=form, user_image=defect_image)
     return render_template('submit.html', form=form, name=' ')

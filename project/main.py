@@ -6,7 +6,7 @@ from tensorflow.keras.models import load_model
 
 
 def main():
-    list_img = os.listdir('./data/test')
+    list_img = os.listdir('data/test')
     if not list_img:
         return print('Нет файлов в папке')
     # загружаем обученную модель

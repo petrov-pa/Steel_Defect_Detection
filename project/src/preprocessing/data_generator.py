@@ -1,7 +1,7 @@
 from tensorflow.keras.utils import Sequence
 import numpy as np
 import cv2
-from src.preprocessing.preprocessing import get_mask, augmentation
+from project.src.preprocessing.preprocessing import get_mask, augmentation
 
 
 class DataGenerator(Sequence):
