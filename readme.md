@@ -135,6 +135,7 @@
 * flake8-fastapi
 * pandas-vet
 * pre-commit
+
 Запуск линтеров:
 
      flake8 <mypythonfile.py>
