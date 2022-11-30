@@ -114,8 +114,6 @@
     isort <mypythonfile.py>
     black <mypythonfile.py>   
 
-Запуск линтеров:
-
 В проекте используется flake8 с расширениями:
 * flake8-comprehensions
 * flake8-implicit-str-concat
@@ -137,7 +135,7 @@
 * flake8-fastapi
 * pandas-vet
 * pre-commit
-
+Запуск линтеров:
 
      flake8 <mypythonfile.py>
 
