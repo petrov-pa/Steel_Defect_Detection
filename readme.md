@@ -139,17 +139,16 @@
 * pre-commit
 
 
-
-    flake8 <mypythonfile.py>
+     flake8 <mypythonfile.py>
 
 #### Запуск из командной строки
 Проверить, что в папку data/test загрузились файлы и запустить скрипт
 
-    python3 main.py 
+    python3 project.main.py 
 
 Предсказанные маски дефектов сохраняются в папку outputs
 #### Запуск через flask 
 Запустить скрипт и выбрать файл из папки data/test
 
-    python3 flask.py 
+    python3 project.flask.py 
 
