@@ -139,6 +139,7 @@
 * pre-commit
 
 
+
     flake8 <mypythonfile.py>
 
 #### Запуск из командной строки
