@@ -1,50 +1,50 @@
-import pandas as pd
+"""This module contains function for split data."""
+
 import os
+
 import numpy as np
+import pandas as pd
 
 
-def train_val_split():
-    """ Split sample into train and valid subsets.
-    Returns:
-        train_seg - list filenames for train segmentation model (np.array)
-        test_seg - list filenames for valid segmentation model (np.array)
-        train_clf - list filenames for train classifier model (np.array)
-        test_clf - list filenames for valid classifier model (np.array)
-        df - dataframe with mask information (DataFrame)
-
-     """
-    train_data = './data/train/images/'
-    df = pd.read_csv('./data/train/train.csv')
-    # В выборке есть много изображений, которые не содержат дефектов. Добавим их в нашу таблицу
+def train_val_split() -> np.ndarray:
+    """Split sample into train and valid subsets."""
+    train_data = "./data/train/images/"
+    dataframe = pd.read_csv("./data/train/train.csv")
+    # Добавим изображения без дефектов в таблицу
     for name in os.listdir(train_data):
-        if name not in df.ImageId.values:
-            new_row = {'ImageId': name, 'ClassId': 0, 'EncodedPixels': '1 409600'}
-            df = df.append(new_row, ignore_index=True)
+        if name not in dataframe.ImageId.to_array():
+            new_row = {"ImageId": name, "ClassId": 0, "EncodedPixels": "1 409600"}
+            dataframe = dataframe.append(new_row, ignore_index=True)
 
     # Добавим в таблицу столбец с меткой есть ли дефект или нет
-    df['defect'] = np.zeros(df.shape[0])
-    df.loc[df.ClassId != 0, 'defect'] = 1
-    count_to_img = df.ImageId.value_counts()
+    dataframe["defect"] = np.zeros(dataframe.shape[0])
+    dataframe.loc[dataframe.ClassId != 0, "defect"] = 1
+    count_to_img = dataframe.ImageId.value_counts()
     test_seg = []  # тестовая выборка для задачи сегментации
-    test_seg.extend(count_to_img[count_to_img == 2][:85].index.values)  # добавим изображения с двумя дефектами
+    test_seg.extend(
+        count_to_img[count_to_img == 2][:85].index.to_array()
+    )  # добавим изображения с двумя дефектами
 
     # отберем изображения, которых еще нет в тестовой выборке
-    df_to_split = df.loc[~df.ImageId.isin(test_seg)]
+    df_to_split = dataframe.loc[~dataframe.ImageId.isin(test_seg)]
     # добавим недостающее количество изображений в выборку
-    test_seg.extend(df_to_split.loc[df_to_split.ClassId == 1, 'ImageId'][:153].values)
-    test_seg.extend(df_to_split.loc[df_to_split.ClassId == 2, 'ImageId'][:36].values)
-    test_seg.extend(df_to_split.loc[df_to_split.ClassId == 3, 'ImageId'][:951].values)
-    test_seg.extend(df_to_split.loc[df_to_split.ClassId == 4, 'ImageId'][:102].values)
-    df_to_seg = df.loc[~df.ImageId.isin(test_seg)]  # убираем из набора данных тестовые изображения
-    df_to_seg.drop(df_to_seg.loc[df_to_seg.ClassId == 0].index[:], axis=0,
-                   inplace=True)  # убираем изображения без дефектов
+    test_seg.extend(df_to_split.loc[df_to_split.ClassId == 1, "ImageId"][:153].to_array())
+    test_seg.extend(df_to_split.loc[df_to_split.ClassId == 2, "ImageId"][:36].to_array())
+    test_seg.extend(df_to_split.loc[df_to_split.ClassId == 3, "ImageId"][:951].to_array())
+    test_seg.extend(df_to_split.loc[df_to_split.ClassId == 4, "ImageId"][:102].to_array())
+    df_to_seg = dataframe.loc[
+        ~dataframe.ImageId.isin(test_seg)
+    ]  # убираем из набора данных тестовые изображения
+    df_to_seg = df_to_seg.drop(
+        df_to_seg.loc[df_to_seg.ClassId == 0].index[:], axis=0
+    )  # убираем изображения без дефектов
     # отбираем названия изображений для обучающей выборки модели сегментации
-    train_seg = df_to_seg['ImageId'].values
+    train_seg = df_to_seg["ImageId"].to_array()
 
     # создадим тестовую выборку для классификатора
     test_clf = test_seg.copy()
-    test_clf.extend(df_to_split.loc[df_to_split.ClassId == 0, 'ImageId'][:1180].values)
+    test_clf.extend(df_to_split.loc[df_to_split.ClassId == 0, "ImageId"][:1180].to_array())
     # отбираем названия изображений для обучающей выборки классификатора
-    train_clf = df.loc[~df.ImageId.isin(test_clf), 'ImageId'].values
+    train_clf = dataframe.loc[~dataframe.ImageId.isin(test_clf), "ImageId"]
 
-    return train_seg, test_seg, train_clf, test_clf, df
+    return train_seg, test_seg, train_clf.to_array(), test_clf, dataframe

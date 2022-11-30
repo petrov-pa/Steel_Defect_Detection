@@ -30,9 +30,6 @@
      <br> 2 класс - 834471 пикселей     <br> 3 класс - 131306899 пикселей 
      <br> 4 класс - 27533572 пикселей 
      <br> Нет дефекта - 2742524929 пикселей
-   * Пример разметки дефекта:
-![img_3.png](img_3.png)
-![img_4.png](img_4.png)
    * Разметка дефектов не совсем очевидна. Дефекты размечены с большим запасом
 
 ## Описание решения:
@@ -84,10 +81,6 @@
 * С двумя головами - 300 секунд
 * С общим backbone - 495 секунд
 Исходя из предположения, что заготовок без дефектов будет намного больше, можно сделать вывод, что разные модели будут работать быстрее
-## Результаты:
-
-![img_5.png](img_5.png)
-![img_6.png](img_6.png)
 
 # Инструкция установки и запуска
 Установка пакетного менеджера:
@@ -110,11 +103,43 @@
 
     poetry add https://test.pypi.org/simple/ steel-defect-detection
 
-Подгрузить нужные файлы:
+Подгрузка нужных файлов:
 
-    python3 scr.load_weights.py  # веса моделей
-    python3 scr.load_test.py     # данные для проверки работы модели
-    python3 scr.load_train.py    # данные для обучения моделей
+    python3 project.src.load_weights.py  # веса моделей
+    python3 project.src.load_test.py     # данные для проверки работы модели
+    python3 project.src.load_train.py    # данные для обучения моделей
+
+Запуск форматеров:
+
+    isort <mypythonfile.py>
+    black <mypythonfile.py>   
+
+Запуск линтеров:
+
+В проекте используется flake8 с расширениями:
+* flake8-comprehensions
+* flake8-implicit-str-concat
+* flake8-literal
+* flake8-multiline-containers
+* flake8-return
+* flake8-broken-line
+* flake8-builtins
+* flake8-functions-names
+* pep8-naming
+* flake8-expression-complexity
+* flake8-functions
+* flake8-length
+* flake8-comments
+* flake8-eradicate
+* flake8-docstrings
+* flake8-docstring-checker
+* flake8-annotations
+* flake8-fastapi
+* pandas-vet
+* pre-commit
+
+
+    flake8 <mypythonfile.py>
 
 #### Запуск из командной строки
 Проверить, что в папку data/test загрузились файлы и запустить скрипт
