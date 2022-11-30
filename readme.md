@@ -134,7 +134,6 @@
 * flake8-annotations
 * flake8-fastapi
 * pandas-vet
-* pre-commit
 
 Запуск линтеров:
 
