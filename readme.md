@@ -103,41 +103,6 @@
 
     poetry add https://test.pypi.org/simple/ steel-defect-detection
 
-Подгрузка нужных файлов:
-
-    python3 project.src.load_weights.py  # веса моделей
-    python3 project.src.load_test.py     # данные для проверки работы модели
-    python3 project.src.load_train.py    # данные для обучения моделей
-
-Запуск форматеров:
-
-    isort <mypythonfile.py>
-    black <mypythonfile.py>   
-
-В проекте используется flake8 с расширениями:
-* flake8-comprehensions
-* flake8-implicit-str-concat
-* flake8-literal
-* flake8-multiline-containers
-* flake8-return
-* flake8-broken-line
-* flake8-builtins
-* flake8-functions-names
-* pep8-naming
-* flake8-expression-complexity
-* flake8-functions
-* flake8-length
-* flake8-comments
-* flake8-eradicate
-* flake8-docstrings
-* flake8-docstring-checker
-* flake8-annotations
-* flake8-fastapi
-* pandas-vet
-
-Запуск линтеров:
-
-     flake8 <mypythonfile.py>
 
 #### Запуск из командной строки
 Проверить, что в папку data/test загрузились файлы и запустить скрипт
@@ -148,5 +113,4 @@
 #### Запуск через flask 
 Запустить скрипт и выбрать файл из папки data/test
 
-    python3 project.flask.py 
 
