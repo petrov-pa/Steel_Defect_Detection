@@ -8,12 +8,18 @@ from project.src.models import get_linknet
 from project.src.preprocessing.preprocessing import DataGenerator
 from project.src.preprocessing.split_data import train_val_split
 
+
+# Получаем параметры для обучения
+with open('../experiments/params.json', 'r') as f:
+    params = json.load(f)
+params = params["segmentation"]
+
 # Получаем данные для обучения
 train, test, _, _, dataframe = train_val_split()
 
 # Создаем генераторы для обучающих и тестовых выборок
-train_gen_seg = DataGenerator(train, dataframe)
-test_gen_seg = DataGenerator(test, dataframe, aug=False)
+train_gen_seg = DataGeneratorSeg(train, dataframe, batch_size = params["batch_size"])
+test_gen_seg = DataGeneratorSeg(test, dataframe, aug=False, batch_size = params["batch_size"])
 
 lr_callback = ReduceLROnPlateau(
     monitor="val_loss",
@@ -35,11 +41,14 @@ save_callback = ModelCheckpoint(
 callbacks = [lr_callback, save_callback]
 
 linknet = get_linknet()
-class_weight = [1.0, 10.0, 0.05, 0.25]
+class_weight = params["class_weight"]
 
 linknet.compile(
-    optimizer=Adam(0.001),
+    optimizer=Adam(params["learning_rate"]),
     loss=weighted_loss(bce_dice_loss, class_weight),
     metrics=[dice_coef],
 )
-linknet.fit(train_gen_seg, validation_data=test_gen_seg, epochs=60, callbacks=callbacks)
+history = linknet.fit(train_gen_seg, validation_data=test_gen_seg, epochs=params["epochs"], callbacks=callbacks)
+
+with open('../experiments/train_history_seg.json', 'w') as f:
+    json.dump(history.history, f, indent=4)
