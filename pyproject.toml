@@ -21,6 +21,7 @@ flask-wtf = "1.0.1"
 werkzeug = "~2.2.2"
 gdown = "~4.5.3"
 
+
 [tool.poetry.group.dev.dependencies]
 numpy = "~1.23.4"
 tensorflow = "2.7.0"
@@ -58,7 +59,10 @@ flake8-docstring-checker = "^1.1"
 flake8-annotations = "^2.9.1"
 flake8-fastapi = "^0.7.0"
 pandas-vet = "^0.2.3"
-pre-commit = "^2.9.3"
+pre-commit = "^2.20.0"
+dvc = "^2.37.0"
+dvc-gdrive = "^2.19.1"
+
 
 [tool.flake8]
 max-line-length = 94
