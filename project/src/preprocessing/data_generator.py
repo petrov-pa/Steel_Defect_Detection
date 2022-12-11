@@ -64,7 +64,7 @@ class DataGeneratorClf(Sequence):
 
         for i in list_id_temp:
             # Загружаем данные и меняем размер изображений
-            path_img = "./data/train/images/" + self.img_name[i]
+            path_img = "../data/train/train_images/" + self.img_name[i]
             img = cv2.imread(path_img) / 255
             label = get_mask(self.img_name[i], self.img_data)
 
@@ -100,7 +100,7 @@ class DataGeneratorSeg(DataGeneratorClf):
 
         for i in list_id_temp:
             # Загружаем данные и меняем размер изображений
-            path_img = "./data/train/images/" + self.img_name[i]
+            path_img = "../data/train/train_images/" + self.img_name[i]
             img = cv2.imread(path_img) / 255
             label = get_mask(self.img_name[i], self.img_data)
 
