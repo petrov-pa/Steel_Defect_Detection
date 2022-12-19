@@ -22,7 +22,7 @@ def get_clf() -> Model:
         encoder_freeze=False,
     )
     x = model.layers[331].output
-    x = GlobalAveragePooling2D(keepdims=True)(x)
+    x = GlobalAveragePooling2D()(x)
     x = BatchNormalization()(x)
     x = Dropout(0.3)(x)
     x = Dense(256)(x)

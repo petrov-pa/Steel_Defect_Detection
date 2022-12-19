@@ -9,7 +9,7 @@ def get_mask(name: str, dataframe: pd.DataFrame) -> np.ndarray:
     mask = np.zeros(1600 * 256)
     for class_id, pixels in dataframe.loc[
         dataframe.ImageId == name, ["ClassId", "EncodedPixels"]
-    ].to_array():
+    ].to_numpy():
         if class_id == 0:  # Если дефектов нет, оставляем нули в маске
             break
         pixels = np.array(pixels.split(), dtype=np.int32)

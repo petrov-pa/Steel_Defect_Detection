@@ -105,9 +105,7 @@
 
 Подгрузка нужных файлов:
 
-    python3 project.src.load_weights.py  # веса моделей
-    python3 project.src.load_test.py     # данные для проверки работы модели
-    python3 project.src.load_train.py    # данные для обучения моделей
+    dvc pull
 
 Запуск форматеров:
 
