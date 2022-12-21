@@ -1,0 +1,4 @@
+/train_seg_data.pickle
+/test_seg_data.pickle
+/train_clf_data.pickle
+/test_clf_data.pickle

@@ -1,0 +1,61 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python project/src/preprocessing/split_data.py
+    deps:
+    - path: project/data/test
+      md5: 6e522b9d2ea4186707cd152a3cc0c885.dir
+      size: 1827998
+      nfiles: 16
+    - path: project/data/train
+      md5: 44fe992da48ada39661e4280042313e3.dir
+      size: 1269891217
+      nfiles: 12569
+    - path: project/src/preprocessing/split_data.py
+      md5: 12fb979c01419f027ff230e5df59b4e6
+      size: 3442
+    outs:
+    - path: project/data/processed_data/test_clf_data.pickle
+      md5: cd13e8122f5fa84d2c7f42a96e0cda92
+      size: 39578
+    - path: project/data/processed_data/test_seg_data.pickle
+      md5: 762bc4fee1a0d3dad87427b5b298c774
+      size: 20696
+    - path: project/data/processed_data/train_clf_data.pickle
+      md5: b15617556a1ab503da271e4e663354ca
+      size: 163172
+    - path: project/data/processed_data/train_seg_data.pickle
+      md5: a01cea63a072332b9364077f22ec495f
+      size: 87601
+  train_classifier:
+    cmd: python project/src/train_classifier.py
+    deps:
+    - path: project/data/processed_data/test_clf_data.pickle
+      md5: cd13e8122f5fa84d2c7f42a96e0cda92
+      size: 39578
+    - path: project/data/processed_data/train_clf_data.pickle
+      md5: b15617556a1ab503da271e4e663354ca
+      size: 163172
+    - path: project/src/train_classifier.py
+      md5: 9c6d4821cfebac091a45fcf4bb5fb907
+      size: 1995
+    outs:
+    - path: project/experiments/train_history_clf.json
+      md5: f0264518f07cf051cdec34d3c488c0c1
+      size: 938
+    - path: project/weights/best_classifier.hdf5
+      md5: dc298701811a0d438fb0dd9ce5e75449
+      size: 98734488
+  evaluate_classifier:
+    cmd: python project/src/evaluate_classifier.py
+    deps:
+    - path: project/src/evaluate_classifier.py
+      md5: a73568866e46ce5cd0811d5b1fd8277f
+      size: 1249
+    - path: project/weights/best_classifier.hdf5
+      md5: dc298701811a0d438fb0dd9ce5e75449
+      size: 98734488
+    outs:
+    - path: project/experiments/clf_metrics.json
+      md5: 6bd77014817f856988341f36e5202d68
+      size: 89

@@ -1,6 +1,7 @@
 """This module contains function for split data."""
 
 import os
+import pickle
 
 import numpy as np
 import pandas as pd
@@ -8,8 +9,8 @@ import pandas as pd
 
 def train_val_split() -> np.ndarray:
     """Split sample into train and valid subsets."""
-    train_data = "../data/train/train_images/"
-    dataframe = pd.read_csv("../data/train/train.csv")
+    train_data = "project/data/train/train_images/"
+    dataframe = pd.read_csv("project/data/train/train.csv")
     # Добавим изображения без дефектов в таблицу
     for name in os.listdir(train_data):
         if name not in dataframe.ImageId.to_list():
@@ -47,4 +48,17 @@ def train_val_split() -> np.ndarray:
     # отбираем названия изображений для обучающей выборки классификатора
     train_clf = dataframe.loc[~dataframe.ImageId.isin(test_clf), "ImageId"]
 
+    with open('project/data/processed_data/train_seg_data.pickle', 'wb') as f:
+        pickle.dump(train_seg, f)
+    with open('project/data/processed_data/test_seg_data.pickle', 'wb') as f:
+        pickle.dump(test_seg, f)
+    with open('project/data/processed_data/train_clf_data.pickle', 'wb') as f:
+        pickle.dump(train_clf.to_list(), f)
+    with open('project/data/processed_data/test_clf_data.pickle', 'wb') as f:
+        pickle.dump(test_clf, f)
+
+    print("Данные предобработаны")
+
     return train_seg, test_seg, train_clf.to_list(), test_clf, dataframe
+
+train_val_split()

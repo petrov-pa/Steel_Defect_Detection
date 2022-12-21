@@ -1,0 +1,46 @@
+stages:
+  prepare:
+    cmd: python project/src/preprocessing/split_data.py
+    deps:
+    - project/data/test
+    - project/data/train
+    - project/src/preprocessing/split_data.py
+    outs:
+    - project/data/processed_data/test_clf_data.pickle
+    - project/data/processed_data/test_seg_data.pickle
+    - project/data/processed_data/train_clf_data.pickle
+    - project/data/processed_data/train_seg_data.pickle
+  train_classifier:
+    cmd: python project/src/train_classifier.py
+    deps:
+    - project/data/processed_data/test_clf_data.pickle
+    - project/data/processed_data/train_clf_data.pickle
+    - project/src/train_classifier.py
+    outs:
+    - project/experiments/train_history_clf.json
+    - project/weights/best_classifier.hdf5
+  evaluate_classifier:
+    cmd: python project/src/evaluate_classifier.py
+    deps:
+    - project/src/evaluate_classifier.py
+    - project/weights/best_classifier.hdf5
+    metrics:
+    - project/experiments/clf_metrics.json:
+        cache: false
+  train_segmentation:
+    cmd: python project/src/train_linknet.py
+    deps:
+    - project/data/processed_data/test_seg_data.pickle
+    - project/data/processed_data/train_seg_data.pickle
+    - project/src/train_linknet.py
+    outs:
+    - project/experiments/train_history_seg.json
+    - project/weights/best_linknet.hdf5
+  evaluate_segmentation:
+    cmd: python project/src/evaluate_segmentation.py
+    deps:
+    - project/src/evaluate_segmentation.py
+    - project/weights/best_linknet.hdf5
+    metrics:
+    - project/experiments/seg_metrics.json:
+        cache: false
